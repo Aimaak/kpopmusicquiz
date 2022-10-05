@@ -1,0 +1,34 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+	<style>
+		.container {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+		}
+	</style>
+	<div class="container">
+		<button id="play-btn">Play!</button>
+		<input type="text" name="guess" id="guess-box" placeholder="Type your guess">
+	</div>
+
+	<div id="tracks" data-tracks="{{ tracks|json_encode() }}"></div>
+
+	<script>
+		var tracksDiv = document.getElementById('tracks');
+		var tracks = JSON.parse(tracksDiv.dataset.tracks);
+		tracksDiv.remove();
+		console.log(tracks);
+
+		const playBtn = document.getElementById('play-btn');
+			playBtn.addEventListener('click', function () {
+			playSound(tracks[0].track.preview_url);
+		});
+
+		function playSound(url) {
+			var audio = new Audio(url);
+			audio.play();
+		}
+	</script>
+{% endblock %}
