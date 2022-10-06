@@ -2,7 +2,6 @@
 
 namespace App\Controller;
 
-use Doctrine\Persistence\ManagerRegistry;
 use SpotifyWebAPI\Session;
 use SpotifyWebAPI\SpotifyWebAPI;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -32,16 +31,32 @@ class HomeController extends AbstractController
             ];
             $totalTracks = $api->getPlaylist($this->getParameter('app.playlist_id'), $options)->tracks->total;
 
+            $limit = 50;
+            $offset = rand(0, ($totalTracks - $limit));
             $options = [
-                'fields' => 'items.track(album(images),artists,duration_ms,name,preview_url)',
-                'limit' => 20,
-                'offset' => $totalTracks-100
+                'fields' => 'items.track(album(images),artists,name,preview_url)',
+                'limit' => $limit,
+                'offset' => $offset
             ];
             $response = $api->getPlaylistTracks($this->getParameter('app.playlist_id'), $options);
 
-            $tracks = array_filter($response->items, function($t) {
-                return !is_null($t->track->preview_url);
-            });
+            $tracks = array_values(
+                array_map(function ($t) {
+                    $t->artist = $t->track->artists[0]->name;
+                    $t->image = new \stdClass();
+                    $t->image->height = $t->track->album->images[0]->height;
+                    $t->image->url = $t->track->album->images[0]->url;
+                    $t->image->width = $t->track->album->images[0]->width;
+                    $t->title = $t->track->name;
+                    $t->url = $t->track->preview_url;
+
+                    unset($t->track);
+
+                    return $t;
+                }, array_filter($response->items, function ($t) {
+                    return !is_null($t->track->preview_url);
+                }))
+            );
         }
 
         return $this->render('home/index.html.twig', [
