@@ -19,16 +19,41 @@
 		var tracksDiv = document.getElementById('tracks');
 		var tracks = JSON.parse(tracksDiv.dataset.tracks);
 		tracksDiv.remove();
-		console.log(tracks);
 
 		const playBtn = document.getElementById('play-btn');
-			playBtn.addEventListener('click', function () {
-			playSound(tracks[0].track.preview_url);
+		playBtn.addEventListener('click', function () {
+			let firstSongIndex = Math.floor(Math.random() * tracks.length);
+			playSong(firstSongIndex);
 		});
 
-		function playSound(url) {
-			var audio = new Audio(url);
+		function playSong(index) {
+			console.log(tracks);
+			var audio = new Audio(tracks[index].url);
 			audio.play();
+
+			audio.addEventListener('ended', function() {
+				playNextSong(index);
+			})
+		}
+
+		function playNextSong(previousIndex) {
+			tracks.splice(previousIndex, 1);
+
+			if (tracks.length == 0) {
+				return endGame();
+			}
+
+			pauseUntilNextSong();
+		}
+
+		function endGame() {
+			alert('Game has ended');
+		}
+
+		function pauseUntilNextSong() {
+			setTimeout(() => {
+				playSong(Math.floor(Math.random() * tracks.length));
+			}, 5000);
 		}
 	</script>
 {% endblock %}
