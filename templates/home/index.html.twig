@@ -7,53 +7,91 @@
 			justify-content: center;
 			align-items: center;
 		}
+
+		#pre-answer {
+			display: none;
+		}
 	</style>
 	<div class="container">
 		<button id="play-btn">Play!</button>
-		<input type="text" name="guess" id="guess-box" placeholder="Type your guess">
+		<input type="text" name="guess" id="guess" placeholder="Type your guess">
+		<p id="pre-answer">The answer was: <span id="answer"></span></p>
 	</div>
+{% endblock %}
 
-	<div id="tracks" data-tracks="{{ tracks|json_encode() }}"></div>
-
+{% block javascripts %}
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"
+		integrity="sha512-aVKKRRi/Q/YV+4mjoKBsE4x3H+BkegoM/em46NNlCqNTmUYADjBbeNefNxYV7giUp0VxICtqdrbqU7iVaeZNXA=="
+		crossorigin="anonymous"
+		referrerpolicy="no-referrer">
+	</script>
 	<script>
-		var tracksDiv = document.getElementById('tracks');
-		var tracks = JSON.parse(tracksDiv.dataset.tracks);
-		tracksDiv.remove();
+		$(document).ready(async function() {
+			var answerDiv = document.getElementById('answer');
+			var playBtn = document.getElementById('play-btn');
+			var preAnswerDiv = document.getElementById('pre-answer');
+			var tracks = await
+				$.ajax({
+					url: '{{ path('app_home_get_songs') }}',
+					type: 'POST',
+					success: function(data, status) {
+						return data;
+					},
+					error : function(error) {
+						console.log('Ajax request failed: ' + error);
+						return false;
+					}
+				});
+			var tracksCopy = tracks;
 
-		const playBtn = document.getElementById('play-btn');
-		playBtn.addEventListener('click', function () {
-			let firstSongIndex = Math.floor(Math.random() * tracks.length);
-			playSong(firstSongIndex);
-		});
-
-		function playSong(index) {
-			console.log(tracks);
-			var audio = new Audio(tracks[index].url);
-			audio.play();
-
-			audio.addEventListener('ended', function() {
-				playNextSong(index);
-			})
-		}
-
-		function playNextSong(previousIndex) {
-			tracks.splice(previousIndex, 1);
-
-			if (tracks.length == 0) {
-				return endGame();
+			if (!tracks || tracks.length == 0) {
+				return console.log('failed to get songs');
 			}
 
-			pauseUntilNextSong();
-		}
+			console.log(tracks);
 
-		function endGame() {
-			alert('Game has ended');
-		}
+			playBtn.addEventListener('click', startGame);
 
-		function pauseUntilNextSong() {
-			setTimeout(() => {
-				playSong(Math.floor(Math.random() * tracks.length));
-			}, 5000);
-		}
+			function startGame() {
+				let firstSongIndex = Math.floor(Math.random() * tracks.length);
+				playSong(firstSongIndex);
+				playBtn.style.display = 'none';
+			}
+
+			function playSong(index) {
+				var audio = new Audio(tracks[index].url);
+				audio.play();
+
+				audio.addEventListener('ended', function() {
+					displayAnswer(index);
+				})
+			}
+
+			function playNextSong(index) {
+				tracks.splice(index, 1);
+
+				if (tracks.length == 0) {
+					console.log('no more tracks');
+					return endGame();
+				}
+
+				return playSong(Math.floor(Math.random() * tracks.length));
+			}
+
+			function endGame() {
+				return console.log('Game has ended');
+			}
+
+			function displayAnswer(index) {
+				preAnswerDiv.style.display = 'block';
+				answer.innerText = tracks[index].artist.concat(' - ', tracks[index].title);
+
+				return setTimeout(() => {
+					preAnswerDiv.style.display = 'none';
+					answer.innerText = '';
+					playNextSong(index);
+				}, 5000);
+			}
+		});
 	</script>
 {% endblock %}
