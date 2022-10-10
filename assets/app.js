@@ -11,5 +11,4 @@ import './styles/app.css';
 // start the Stimulus application
 import './bootstrap';
 
-// game functions
-import './check';
+import './index';
