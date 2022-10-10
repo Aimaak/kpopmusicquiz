@@ -4,8 +4,7 @@ import { checkArtistName, checkTrackName } from './check';
 
 $(async function () {
     var answerDiv = document.getElementById('answerDiv');
-    let currentSongIndex;
-    var form = document.getElementById('guess-form');
+    var currentSongIndex;
     var guessInput = document.getElementById('guess');
     var playBtn = document.getElementById('play-btn');
     var preAnswerDiv = document.getElementById('pre-answer');
@@ -13,7 +12,7 @@ $(async function () {
         $.ajax({
             url: '/songs/get',
             type: 'POST',
-            success: function (data, status) {
+            success: function (data) {
                 return data;
             },
             error: function (error) {
@@ -79,7 +78,7 @@ $(async function () {
     });
 
     function check() {
-        console.log(checkArtistName(tracks[currentSongIndex].artist, guessInput.value));
-        console.log(checkTrackName(tracks[currentSongIndex].title, guessInput.value));
+        console.log(checkArtistName({ artistName: tracks[currentSongIndex].artist, msg: guessInput.value }));
+        console.log(checkTrackName({ trackName: tracks[currentSongIndex].title, msg: guessInput.value }));
     }
 })
