@@ -3,7 +3,7 @@ import './check';
 import { checkArtistName, checkTrackName } from './check';
 
 $(async function () {
-    var answerDiv = document.getElementById('answerDiv');
+    var answerDiv = document.getElementById('answer');
     var currentSongIndex;
     var guessInput = document.getElementById('guess');
     var playBtn = document.getElementById('play-btn');
