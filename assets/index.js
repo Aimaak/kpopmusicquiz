@@ -1,8 +1,11 @@
-import $ from 'jquery';
+import $, { event } from 'jquery';
 import './check';
+import { checkArtistName, checkTrackName } from './check';
 
 $(async function () {
-    var answerDiv = document.getElementById('answer');
+    var answerDiv = document.getElementById('answerDiv');
+    let currentSongIndex;
+    var form = document.getElementById('guess-form');
     var guessInput = document.getElementById('guess');
     var playBtn = document.getElementById('play-btn');
     var preAnswerDiv = document.getElementById('pre-answer');
@@ -29,8 +32,8 @@ $(async function () {
     playBtn.addEventListener('click', startGame);
 
     function startGame() {
-        let firstSongIndex = Math.floor(Math.random() * tracks.length);
-        playSong(firstSongIndex);
+        currentSongIndex = Math.floor(Math.random() * tracks.length);
+        playSong(currentSongIndex);
         playBtn.style.display = 'none';
     }
 
@@ -51,7 +54,8 @@ $(async function () {
             return endGame();
         }
 
-        return playSong(Math.floor(Math.random() * tracks.length));
+        currentSongIndex = Math.floor(Math.random() * tracks.length);
+        return playSong(currentSongIndex);
     }
 
     function endGame() {
@@ -60,12 +64,22 @@ $(async function () {
 
     function displayAnswer(index) {
         preAnswerDiv.style.display = 'block';
-        answer.innerText = tracks[index].artist.concat(' - ', tracks[index].title);
+        answerDiv.innerText = tracks[index].artist.concat(' - ', tracks[index].title);
 
         return setTimeout(() => {
             preAnswerDiv.style.display = 'none';
-            answer.innerText = '';
+            answerDiv.innerText = '';
             playNextSong(index);
         }, 5000);
+    }
+
+    $('#guess-form').on('submit', function (event) {
+        event.preventDefault();
+        check();
+    });
+
+    function check() {
+        console.log(checkArtistName(tracks[currentSongIndex].artist, guessInput.value));
+        console.log(checkTrackName(tracks[currentSongIndex].title, guessInput.value));
     }
 })
