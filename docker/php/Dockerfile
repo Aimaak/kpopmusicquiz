@@ -30,9 +30,16 @@ RUN set -eux; \
     if [ -f composer.json ]; then \
     composer install --prefer-dist --no-dev --no-autoloader --no-scripts --no-progress; \
     composer clear-cache; \
+    fi \
+    if [ -f package.json ]; then \
+    npm install; \
+    npm run dev; \
     fi
 
 WORKDIR /var/www/
+
+COPY docker-entrypoint.sh /usr/local/bin/docker-entrypoint
+RUN chmod +x /usr/local/bin/docker-entrypoint
 
 # copy sources
 COPY . .
@@ -46,3 +53,6 @@ RUN set -eux; \
     composer run-script --no-dev post-install-cmd; \
     chmod +x bin/console; sync; \
     fi
+
+ENTRYPOINT [ "docker-entrypoint" ]
+CMD [ "apache2-foreground" ]
