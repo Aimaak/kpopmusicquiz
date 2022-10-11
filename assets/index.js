@@ -1,4 +1,4 @@
-import $, { event } from 'jquery';
+import $ from 'jquery';
 import './check';
 import { checkArtistName, checkTrackName } from './check';
 
