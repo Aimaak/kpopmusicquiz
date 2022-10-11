@@ -69,7 +69,7 @@ $(async function () {
             preAnswerDiv.style.display = 'none';
             answerDiv.innerText = '';
             playNextSong(index);
-        }, 5000);
+        }, 10000);
     }
 
     $('#guess-form').on('submit', function (event) {
