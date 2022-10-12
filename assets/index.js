@@ -2,12 +2,15 @@ import $ from 'jquery';
 import { checkArtistName, checkTrackName } from './check';
 
 $(async function () {
-    var answerDiv = document.getElementById('answer');
-    var currentSongIndex;
-    var guessInput = document.getElementById('guess');
-    var playBtn = document.getElementById('play-btn');
-    var preAnswerDiv = document.getElementById('pre-answer');
-    var tracks = await
+    let answerDiv = document.getElementById('answer');
+    let canAnswerArtist = false;
+    let canAnswerTitle = false;
+    let currentSongIndex;
+    let guessInput = document.getElementById('guess');
+    let playBtn = document.getElementById('play-btn');
+    let preAnswerDiv = document.getElementById('pre-answer');
+    let scores = 0;
+    let tracks = await
         $.ajax({
             url: '/songs/get',
             type: 'POST',
@@ -19,7 +22,7 @@ $(async function () {
                 return false;
             }
         });
-    var tracksCopy = tracks;
+    let tracksCopy = tracks;
 
     if (!tracks || tracks.length == 0) {
         return console.log('failed to get songs');
@@ -36,8 +39,10 @@ $(async function () {
     }
 
     function playSong(index) {
-        var audio = new Audio(tracks[index].url);
+        let audio = new Audio(tracks[index].url);
         audio.play();
+        canAnswerArtist = true;
+        canAnswerTitle = true;
 
         audio.addEventListener('ended', function () {
             displayAnswer(index);
@@ -63,10 +68,13 @@ $(async function () {
     function displayAnswer(index) {
         preAnswerDiv.style.display = 'block';
         answerDiv.innerText = tracks[index].artist.concat(' - ', tracks[index].title);
+        guessInput.disabled = true;
+        guessInput.value = '';
 
         return setTimeout(() => {
             preAnswerDiv.style.display = 'none';
             answerDiv.innerText = '';
+            guessInput.disabled = false;
             playNextSong(index);
         }, 10000);
     }
@@ -74,10 +82,26 @@ $(async function () {
     $('#guess-form').on('submit', function (event) {
         event.preventDefault();
         check();
+        guessInput.value = '';
     });
 
     function check() {
-        console.log(checkArtistName({ artistName: tracks[currentSongIndex].artist, msg: guessInput.value }));
-        console.log(checkTrackName({ trackName: tracks[currentSongIndex].title, msg: guessInput.value }));
+        if (canAnswerArtist === true) {
+            if (checkArtistName({ artistName: tracks[currentSongIndex].artist, msg: guessInput.value }) === true) {
+                addScore(1);
+                canAnswerArtist = false;
+            }
+        }
+        if (canAnswerTitle === true) {
+            if (checkTrackName({ trackName: tracks[currentSongIndex].title, msg: guessInput.value }) === true) {
+                addScore(3);
+                canAnswerTitle = false;
+            }
+        }
+        console.log(scores);
+    }
+
+    function addScore(points) {
+        scores += points;
     }
 });
