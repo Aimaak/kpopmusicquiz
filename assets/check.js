@@ -1,4 +1,4 @@
-import diacritics from 'diacritics';
+import { remove } from 'diacritics';
 import FuzzySet from 'fuzzyset';
 
 const checkArtistName = ({ artistName, msg }) => {
@@ -37,7 +37,7 @@ const cleanInput = (str) => {
     str = str.toLowerCase().trim();
     str = str.replace(/\s{2,}/g, " ");
     str = str.replace(/(\'|\.)/g, " ");
-    str = diacritics.remove(str);
+    str = remove(str);
     str = str.trim();
 
     return str;
