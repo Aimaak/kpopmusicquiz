@@ -7,6 +7,7 @@ $(async function () {
     let canAnswerTitle = false;
     let currentSongIndex;
     let guessInput = document.getElementById('guess');
+    let guessResult = document.getElementById('guess-result');
     let playBtn = document.getElementById('play-btn');
     let preAnswerDiv = document.getElementById('pre-answer');
     let scores = 0;
@@ -34,15 +35,15 @@ $(async function () {
 
     function startGame() {
         currentSongIndex = Math.floor(Math.random() * tracks.length);
-        playSong(currentSongIndex);
         playBtn.style.display = 'none';
+        playSong(currentSongIndex);
     }
 
     function playSong(index) {
         let audio = new Audio(tracks[index].url);
-        audio.play();
         canAnswerArtist = true;
         canAnswerTitle = true;
+        audio.play();
 
         audio.addEventListener('ended', function () {
             displayAnswer(index);
@@ -66,15 +67,17 @@ $(async function () {
     }
 
     function displayAnswer(index) {
-        preAnswerDiv.style.display = 'block';
         answerDiv.innerText = tracks[index].artist.concat(' - ', tracks[index].title);
+        preAnswerDiv.style.display = 'block';
         guessInput.disabled = true;
         guessInput.value = '';
+        guessResult.innerText = '';
 
         return setTimeout(() => {
-            preAnswerDiv.style.display = 'none';
             answerDiv.innerText = '';
+            preAnswerDiv.style.display = 'none';
             guessInput.disabled = false;
+            guessInput.style.borderColor = '#767676';
             playNextSong(index);
         }, 10000);
     }
@@ -82,26 +85,49 @@ $(async function () {
     $('#guess-form').on('submit', function (event) {
         event.preventDefault();
         check();
-        guessInput.value = '';
     });
 
     function check() {
+        let isRight = false;
+        let msg;
+
         if (canAnswerArtist === true) {
             if (checkArtistName({ artistName: tracks[currentSongIndex].artist, msg: guessInput.value }) === true) {
                 addScore(1);
                 canAnswerArtist = false;
+                guessInput.value = '';
+                msg = 'You found the artist!';
+                isRight = true;
             }
         }
         if (canAnswerTitle === true) {
             if (checkTrackName({ trackName: tracks[currentSongIndex].title, msg: guessInput.value }) === true) {
                 addScore(3);
                 canAnswerTitle = false;
+                guessInput.value = '';
+                msg = 'You found the title!';
+                isRight = true;
             }
         }
+
+        notifyUser(isRight, msg);
         console.log(scores);
     }
 
     function addScore(points) {
         scores += points;
+    }
+
+    function notifyUser(isRight, msg) {
+        console.log(isRight, msg);
+        let color = isRight ? '#00FF00' : '#FF0000';
+        if (msg) {
+            guessResult.innerText = msg;
+        }
+        if (isRight) {
+            guessInput.style.borderColor = color;
+        } else {
+            guessInput.style.borderColor = color;
+        }
     }
 });
