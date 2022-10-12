@@ -24,7 +24,7 @@ services:
       - dev
 
   www:
-    build: ./docker/php
+    build: ./
     ports:
       - 8741:80
     volumes:
