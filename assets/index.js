@@ -5,11 +5,11 @@ $(async function () {
     let answerDiv = document.getElementById('answer');
     let canAnswerArtist = false;
     let canAnswerTitle = false;
+    let container = document.querySelector('div.container');
     let currentSongIndex;
     let guessInput = document.getElementById('guess');
     let guessResult = document.getElementById('guess-result');
     let playBtn = document.getElementById('play-btn');
-    let preAnswerDiv = document.getElementById('pre-answer');
     let scores = 0;
     let tracks = await
         $.ajax({
@@ -62,12 +62,12 @@ $(async function () {
     }
 
     function endGame() {
+        container.innerHTML = '';
         return console.log('Game has ended');
     }
 
     function displayAnswer(index) {
-        answerDiv.innerText = tracks[index].artist.concat(' - ', tracks[index].title);
-        preAnswerDiv.style.display = 'block';
+        answerDiv.innerText = 'The answer was: ' + tracks[index].artist.concat(' - ', tracks[index].title);
         guessInput.disabled = true;
         guessInput.style.borderColor = 'inherit';
         guessInput.value = '';
@@ -75,7 +75,6 @@ $(async function () {
 
         return setTimeout(() => {
             answerDiv.innerText = '';
-            preAnswerDiv.style.display = 'none';
             guessInput.disabled = false;
             playNextSong(index);
         }, 10000);
