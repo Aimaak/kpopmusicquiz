@@ -16,6 +16,9 @@ $(async function () {
             url: '/songs/get',
             type: 'POST',
             success: function (data) {
+                if (!data || data.length == 0) {
+                    return console.log('failed to get songs');
+                }
                 return data;
             },
             error: function (error) {
@@ -24,10 +27,6 @@ $(async function () {
             }
         });
     let tracksCopy = tracks;
-
-    if (!tracks || tracks.length == 0) {
-        return console.log('failed to get songs');
-    }
 
     console.log(tracks);
 
@@ -70,6 +69,7 @@ $(async function () {
         answerDiv.innerText = tracks[index].artist.concat(' - ', tracks[index].title);
         preAnswerDiv.style.display = 'block';
         guessInput.disabled = true;
+        guessInput.style.borderColor = 'inherit';
         guessInput.value = '';
         guessResult.innerText = '';
 
@@ -77,7 +77,6 @@ $(async function () {
             answerDiv.innerText = '';
             preAnswerDiv.style.display = 'none';
             guessInput.disabled = false;
-            guessInput.style.borderColor = '#767676';
             playNextSong(index);
         }, 10000);
     }
