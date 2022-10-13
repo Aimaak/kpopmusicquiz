@@ -1,9 +1,1 @@
-body {
-    background-color: lightgray;
-}
-
-.container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
+@import "~bulma/css/bulma.min.css";

@@ -2,6 +2,7 @@
 <html>
 	<head>
 		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<title>
 			{% block title %}K-Pop Music Quiz
 			{% endblock %}
@@ -18,13 +19,17 @@
 		{% endblock %}
 	</head>
 	<body>
-		{% for label, messages in app.flashes %}
-			{% for message in messages %}
-				<div class="flash-{{ label }}">
-					{{ message }}
-				</div>
-			{% endfor %}
-		{% endfor %}
-		{% block body %}{% endblock %}
+		<section class="section">
+			<div class="container">
+				{% for label, messages in app.flashes %}
+					{% for message in messages %}
+						<div class="flash-{{ label }}">
+							{{ message }}
+						</div>
+					{% endfor %}
+				{% endfor %}
+				{% block body %}{% endblock %}
+			</div>
+		</section>
 	</body>
 </html>
