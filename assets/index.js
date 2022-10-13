@@ -16,9 +16,6 @@ $(async function () {
             url: '/songs/get',
             type: 'POST',
             success: function (data) {
-                if (!data || data.length == 0) {
-                    return console.log('failed to get songs');
-                }
                 return data;
             },
             error: function (error) {
@@ -33,6 +30,9 @@ $(async function () {
     playBtn.addEventListener('click', startGame);
 
     function startGame() {
+        if (!tracks || tracks.length == 0) {
+            return console.log('failed to get songs');
+        }
         currentSongIndex = Math.floor(Math.random() * tracks.length);
         playBtn.style.display = 'none';
         playSong(currentSongIndex);
@@ -122,10 +122,8 @@ $(async function () {
         if (msg) {
             guessResult.innerText = msg;
         }
-        if (isRight) {
-            guessInput.classList.add('is-success');
-        } else {
-            guessInput.classList.add('is-danger');
-        }
+        guessInput.classList = '';
+        guessInput.classList.add('input', 'is-large');
+        guessInput.classList.add(isRight ? 'is-success' : 'is-danger');
     }
 });
