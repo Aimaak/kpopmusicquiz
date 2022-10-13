@@ -1,1 +1,14 @@
 @import "~bulma/css/bulma.min.css";
+
+html,
+body {
+    height: 100%;
+}
+
+input#guess {
+    width: 50%;
+}
+
+.input {
+    border-width: thick;
+}

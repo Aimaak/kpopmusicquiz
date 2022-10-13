@@ -1,10 +1,16 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-	<button id="play-btn">Play!</button>
-	<form id="guess-form">
-		<input type="text" name="guess" id="guess" placeholder="Type your guess">
+	<form class="mb-3" id="guess-form">
+		<div class="field">
+			<div class="control has-icons-right">
+				<input class="input is-large" type="text" name="guess" id="guess" placeholder="Type your guess">
+			</div>
+		</div>
 	</form>
-	<p id="guess-result"></p>
-	<span id="answer"></span>
+	<button class="button is-primary is-large" id="play-btn">Play!</button>
+	<div class="content">
+		<p id="guess-result"></p>
+		<span id="answer"></span>
+	</div>
 {% endblock %}

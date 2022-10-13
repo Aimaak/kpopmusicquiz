@@ -69,7 +69,8 @@ $(async function () {
     function displayAnswer(index) {
         answerDiv.innerText = 'The answer was: ' + tracks[index].artist.concat(' - ', tracks[index].title);
         guessInput.disabled = true;
-        guessInput.style.borderColor = 'inherit';
+        guessInput.classList = '';
+        guessInput.classList.add('input', 'is-large');
         guessInput.value = '';
         guessResult.innerText = '';
 
@@ -118,14 +119,13 @@ $(async function () {
 
     function notifyUser(isRight, msg) {
         console.log(isRight, msg);
-        let color = isRight ? '#00FF00' : '#FF0000';
         if (msg) {
             guessResult.innerText = msg;
         }
         if (isRight) {
-            guessInput.style.borderColor = color;
+            guessInput.classList.add('is-success');
         } else {
-            guessInput.style.borderColor = color;
+            guessInput.classList.add('is-danger');
         }
     }
 });
