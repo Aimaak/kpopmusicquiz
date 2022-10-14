@@ -76,7 +76,7 @@ $(async function () {
         return setTimeout(() => {
             answerDiv.innerText = '';
             guessInput.disabled = false;
-            guessInput.placeholder = 'Guess the title or the artist';
+            guessInput.placeholder = 'Guess the title and/or the artist';
             playNextSong(index);
         }, 10000);
     }
