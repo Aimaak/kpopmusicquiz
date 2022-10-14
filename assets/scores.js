@@ -3,35 +3,40 @@ let container = document.querySelector('div.container');
 const displayScores = (scores) => {
     container.innerHTML = '';
     scores = Object.entries(scores).map((u) => ({
-        username: u[0],
-        value: u[1],
+        player: u[0],
+        points: u[1],
     }));
+
+    createTable(scores);
+    addPlayAgainButton();
+}
+
+const createTable = (scores) => {
     console.log('Scores');
     console.log(scores);
-
     let table = document.createElement('table');
     table.className = 'table is-fullwidth m-auto';
 
     let thead = table.createTHead();
     let rowHeader = thead.insertRow();
-    let usernameHeader = rowHeader.insertCell();
+    let playerHeader = rowHeader.insertCell();
     let scoreHeader = rowHeader.insertCell();
-    let headerUsernameText = document.createTextNode('Player');
+    let headerPlayerText = document.createTextNode('Player');
     let headerScoreText = document.createTextNode('Points');
 
     rowHeader.className = 'is-selected';
 
-    usernameHeader.appendChild(headerUsernameText);
+    playerHeader.appendChild(headerPlayerText);
     scoreHeader.appendChild(headerScoreText);
 
     scores.forEach((score) => {
         let row = table.insertRow();
-        let usernameCell = row.insertCell();
+        let playerCell = row.insertCell();
         let scoreCell = row.insertCell();
-        let usernameText = document.createTextNode(score.username);
-        let scoreText = document.createTextNode(score.value);
+        let playerText = document.createTextNode(score.player);
+        let scoreText = document.createTextNode(score.points);
 
-        usernameCell.appendChild(usernameText);
+        playerCell.appendChild(playerText);
         scoreCell.appendChild(scoreText);
     });
     container.appendChild(table);
