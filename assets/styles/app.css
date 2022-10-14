@@ -5,6 +5,10 @@ body {
     height: 100%;
 }
 
+.section {
+    height: 76.4%;
+}
+
 input#guess {
     width: 50%;
 }

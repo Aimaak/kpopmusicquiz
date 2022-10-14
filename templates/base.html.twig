@@ -19,6 +19,9 @@
 		{% endblock %}
 	</head>
 	<body class="has-background-dark has-text-centered has-text-light">
+		<div class="content pt-3">
+			<h1 class="has-text-light">K-Pop Music Quiz</h1>
+		</div>
 		<section class="section">
 			<div class="container">
 				{% for label, messages in app.flashes %}
@@ -31,5 +34,12 @@
 				{% block body %}{% endblock %}
 			</div>
 		</section>
+		<footer class="footer has-background-dark is-fixed-bottom">
+			<div class="content has-text-centered">
+				<p>
+					Made with &hearts; by <a href="https://twitter.com/Aimaak_">Aimak</a>
+				</p>
+			</div>
+		</footer>
 	</body>
 </html>
