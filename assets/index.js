@@ -1,11 +1,11 @@
 import $ from 'jquery';
 import { checkArtistName, checkTrackName } from './check';
+import { displayScores } from './scores';
 
 $(async function () {
     let answerDiv = document.getElementById('answer');
     let canAnswerArtist = false;
     let canAnswerTitle = false;
-    let container = document.querySelector('div.container');
     let currentSongIndex;
     let guessInput = document.getElementById('guess');
     let guessResult = document.getElementById('guess-result');
@@ -53,7 +53,6 @@ $(async function () {
         tracks.splice(index, 1);
 
         if (tracks.length == 0) {
-            console.log('no more tracks');
             return endGame();
         }
 
@@ -62,8 +61,7 @@ $(async function () {
     }
 
     function endGame() {
-        container.innerHTML = '';
-        return console.log('Game has ended');
+        return displayScores(scores);
     }
 
     function displayAnswer(index) {
@@ -71,12 +69,14 @@ $(async function () {
         guessInput.disabled = true;
         guessInput.classList = '';
         guessInput.classList.add('input', 'is-large');
+        guessInput.placeholder = 'Wait for next song';
         guessInput.value = '';
         guessResult.innerText = '';
 
         return setTimeout(() => {
             answerDiv.innerText = '';
             guessInput.disabled = false;
+            guessInput.placeholder = 'Guess the title or the artist';
             playNextSong(index);
         }, 10000);
     }
@@ -110,7 +110,6 @@ $(async function () {
         }
 
         notifyUser(isRight, msg);
-        console.log(scores);
     }
 
     function addScore(points) {
@@ -118,10 +117,7 @@ $(async function () {
     }
 
     function notifyUser(isRight, msg) {
-        console.log(isRight, msg);
-        if (msg) {
-            guessResult.innerText = msg;
-        }
+        if (msg) guessResult.innerText = msg;
         guessInput.classList = '';
         guessInput.classList.add('input', 'is-large');
         guessInput.classList.add(isRight ? 'is-success' : 'is-danger');
