@@ -10,7 +10,7 @@ $(async function () {
     let guessInput = document.getElementById('guess');
     let guessResult = document.getElementById('guess-result');
     let playBtn = document.getElementById('play-btn');
-    let scores = 0;
+    let scores = {};
     let tracks = await
         $.ajax({
             url: '/songs/get',
@@ -24,6 +24,7 @@ $(async function () {
             }
         });
     let tracksCopy = tracks;
+    let username = 'You';
 
     console.log(tracks);
 
@@ -92,7 +93,7 @@ $(async function () {
 
         if (canAnswerArtist === true) {
             if (checkArtistName({ artistName: tracks[currentSongIndex].artist, msg: guessInput.value }) === true) {
-                addScore(1);
+                addScore(username, 1);
                 canAnswerArtist = false;
                 guessInput.value = '';
                 msg = 'You found the artist!';
@@ -101,7 +102,7 @@ $(async function () {
         }
         if (canAnswerTitle === true) {
             if (checkTrackName({ trackName: tracks[currentSongIndex].title, msg: guessInput.value }) === true) {
-                addScore(3);
+                addScore(username, 3);
                 canAnswerTitle = false;
                 guessInput.value = '';
                 msg = 'You found the title!';
@@ -112,8 +113,11 @@ $(async function () {
         notifyUser(isRight, msg);
     }
 
-    function addScore(points) {
-        scores += points;
+    function addScore(username, points) {
+        if (scores.hasOwnProperty(username) === false) {
+            scores[username] = 0;
+        }
+        scores[username] += points;
     }
 
     function notifyUser(isRight, msg) {
