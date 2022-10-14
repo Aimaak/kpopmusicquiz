@@ -10,7 +10,7 @@ $(async function () {
     let guessInput = document.getElementById('guess');
     let guessResult = document.getElementById('guess-result');
     let playBtn = document.getElementById('play-btn');
-    let scores = {};
+    let scores = [];
     let tracks = await
         $.ajax({
             url: '/songs/get',
