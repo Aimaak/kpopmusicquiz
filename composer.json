@@ -96,7 +96,7 @@
         "symfony": {
             "allow-contrib": false,
             "require": "6.1.*",
-            "docker": false
+            "docker": true
         }
     },
     "require-dev": {
