@@ -23,8 +23,6 @@ services:
       - ./public:/srv/app/public:ro
       - ./docker/caddy/Caddyfile:/etc/caddy/Caddyfile:ro
 
-  database:
-    environment:
-      MYSQL_ALLOW_EMPTY_PASSWORD: yes
-    ports:
-      - "3306"
+  # database:
+  #   ports:
+  #     - "3306:3306"

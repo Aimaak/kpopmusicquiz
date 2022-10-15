@@ -16,9 +16,9 @@ services:
       timeout: 3s
       retries: 3
       start_period: 30s
-    environment:
-      # Run "composer require symfony/orm-pack" to install and configure Doctrine ORM
-      DATABASE_URL: mysql://${MYSQL_USER:-app}:${MYSQL_PASSWORD:-!ChangeMe!}@database/${MYSQL_DATABASE:-app}?serverVersion=${DB_VERSION:-8.0}&charset=utf8mb4
+      # environment:
+      #   # Run "composer require symfony/orm-pack" to install and configure Doctrine ORM
+      #   DATABASE_URL: mysql://${DB_USER:-app}:${DB_PASSWORD:-ejvet}@database/${DB_DATABASE:-app}?serverVersion=${DB_VERSION:-8.0}&charset=utf8mb4
 
   caddy:
     build:
@@ -47,18 +47,27 @@ services:
         published: ${HTTP3_PORT:-443}
         protocol: udp
 
-  database:
-    image: mysql:${DB_VERSION:-8.0}
-    environment:
-      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:-ejvet}
-      MYSQL_DATABASE: ${MYSQL_DATABASE:-app}
-      # You should definitely change the password in production
-      MYSQL_PASSWORD: ${MYSQL_PASSWORD:-!ChangeMe!}
-      MYSQL_USER: ${MYSQL_USER:-app}
-    volumes:
-      - db-data:/var/lib/mysql:rw
-      # You may use a bind-mounted host directory instead, so that it is harder to accidentally remove the volume and lose all your data!
-      # - ./docker/db/data:/var/lib/mysql/data:rw
+  # database:
+  #   image: mysql:${DB_VERSION:-8.0}
+  #   command: mysqld --default-authentication-plugin=mysql_native_password
+  #   environment:
+  #     MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD:-ejvet}
+  #     MYSQL_DATABASE: ${DB_DATABASE:-app}
+  #     # You should definitely change the password in production
+  #     MYSQL_PASSWORD: ${DB_PASSWORD:-ejvet}
+  #     MYSQL_USER: ${DB_USER:-app}
+  #   volumes:
+  #     - db-data:/var/lib/mysql:rw
+  #     # You may use a bind-mounted host directory instead, so that it is harder to accidentally remove the volume and lose all your data!
+  #     # - ./docker/db/data:/var/lib/mysql/data:rw
+
+  # phpmyamdin:
+  #   image: phpmyadmin
+  #   restart: always
+  #   ports:
+  #     - 8080:80
+  #   environment:
+  #     - PMA_HOST=database
 
 volumes:
   php_socket:
