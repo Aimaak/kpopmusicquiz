@@ -41,7 +41,6 @@ class HomeController extends AbstractController
         $totalTracks = $api->getPlaylist($this->getParameter('app.playlist_id'), $options)->tracks->total;
 
         $limit = 50;
-        $limit = 1;
         $offset = rand(0, ($totalTracks - $limit));
         $options = [
             'fields' => 'items.track(album(images),artists,name,preview_url)',
