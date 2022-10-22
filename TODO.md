@@ -9,7 +9,7 @@
 - [x] Notify if user's wrong or right
 - [x] Fix Dockerfile (put it at root folder)
 - [x] Display scores
-- [ ] Implement play again
-- [ ] Add image when showing answer
+- [x] Implement play again
+- [x] Add image when showing answer
 - [ ] Add multiplayer
-- [ ] Add data persistence
+- [ ] Save games data ?
