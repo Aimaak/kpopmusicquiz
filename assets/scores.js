@@ -15,7 +15,7 @@ const createTable = (scores) => {
   console.log('Scores');
   console.log(scores);
   let table = document.createElement('table');
-  table.className = 'table is-fullwidth is-size-5 m-auto';
+  table.className = 'table is-fullwidth is-size-5 mx-auto mb-5';
 
   let thead = table.createTHead();
   let rowHeader = thead.insertRow();
@@ -45,7 +45,13 @@ const createTable = (scores) => {
 }
 
 const addPlayAgainButton = () => {
-
+  let btn = document.createElement('button');
+  btn.className = 'button is-primary is-large';
+  btn.innerHTML = 'Play again!';
+  btn.onclick = function () {
+    window.location.reload();
+  };
+  container.appendChild(btn);
 }
 
 export { displayScores };
