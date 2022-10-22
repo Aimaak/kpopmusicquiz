@@ -78,7 +78,6 @@ RUN set -eux; \
 	if [ -f composer.json ]; then \
 	composer install --prefer-dist --no-dev --no-autoloader --no-scripts --no-progress; \
 	composer clear-cache; \
-	npm install --force; \
 	fi
 
 # copy sources
@@ -92,6 +91,7 @@ RUN set -eux; \
 	composer dump-env prod; \
 	composer run-script --no-dev post-install-cmd; \
 	chmod +x bin/console; sync; \
+	npm install --force; \
 	npm run build; \
 	fi
 
