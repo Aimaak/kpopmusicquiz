@@ -9,6 +9,7 @@ $(async function () {
   let currentSongIndex;
   let guessInput = document.getElementById('guess');
   let guessResult = document.getElementById('guess-result');
+  let image = document.getElementById('track-image');
   let playBtn = document.getElementById('play-btn');
   let scores = [];
   let tracks = await
@@ -73,11 +74,14 @@ $(async function () {
     guessInput.placeholder = 'Wait for next song';
     guessInput.value = '';
     guessResult.innerText = '';
+    image.src = tracks[index].image.url;
+    image.style.display = 'initial';
 
     return setTimeout(() => {
       answerDiv.innerText = '';
       guessInput.disabled = false;
       guessInput.placeholder = 'Guess the title and/or the artist';
+      image.style.display = 'none';
       playNextSong(index);
     }, 10000);
   }
