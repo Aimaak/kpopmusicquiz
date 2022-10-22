@@ -34,7 +34,7 @@ RUN apk add --no-cache \
 	gettext \
 	git \
 	make \
-	nodejs \
+	npm \
 	;
 
 RUN set -eux; \
