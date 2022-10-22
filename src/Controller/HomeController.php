@@ -56,7 +56,8 @@ class HomeController extends AbstractController
                 $t->image->height = $t->track->album->images[0]->height;
                 $t->image->url = $t->track->album->images[0]->url;
                 $t->image->width = $t->track->album->images[0]->width;
-                $t->title = $t->track->name;
+                $t->originalTitle = $t->track->name;
+                $t->title = $this->clean($t->track->name);
                 $t->url = $t->track->preview_url;
 
                 unset($t->track);
@@ -68,5 +69,24 @@ class HomeController extends AbstractController
         );
 
         return new JsonResponse($tracks);
+    }
+
+    /**
+     * Clean a string
+     *
+     * @param string $str
+     * @return string $cleaned
+     */
+    private function clean(string $str)
+    {
+        $cleaned = trim($str);
+        $found = preg_match("/(\(|-|pt\.)/i", $cleaned, $matches, PREG_OFFSET_CAPTURE);
+
+        if ($found === 1) {
+            $index = $matches[0][1];
+            $cleaned = trim(substr($cleaned, 0, $index));
+        }
+
+        return $cleaned;
     }
 }

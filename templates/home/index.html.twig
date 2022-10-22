@@ -1,97 +1,17 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-	<style>
-		.container {
-			display: flex;
-			justify-content: center;
-			align-items: center;
-		}
-
-		#pre-answer {
-			display: none;
-		}
-	</style>
-	<div class="container">
-		<button id="play-btn">Play!</button>
-		<input type="text" name="guess" id="guess" placeholder="Type your guess">
-		<p id="pre-answer">The answer was: <span id="answer"></span></p>
+	<form class="mb-3" id="guess-form">
+		<div class="field">
+			<div class="control has-icons-right">
+				<input class="input is-large" type="text" name="guess" id="guess" placeholder="Guess the title and/or the artist">
+			</div>
+		</div>
+	</form>
+	<button class="button is-primary is-large" id="play-btn">Play!</button>
+	<div class="content">
+		<p class="is-size-3" id="guess-result"></p>
+		<span class="is-size-3" id="answer"></span>
 	</div>
-{% endblock %}
-
-{% block javascripts %}
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"
-		integrity="sha512-aVKKRRi/Q/YV+4mjoKBsE4x3H+BkegoM/em46NNlCqNTmUYADjBbeNefNxYV7giUp0VxICtqdrbqU7iVaeZNXA=="
-		crossorigin="anonymous"
-		referrerpolicy="no-referrer">
-	</script>
-	<script>
-		$(document).ready(async function() {
-			var answerDiv = document.getElementById('answer');
-			var playBtn = document.getElementById('play-btn');
-			var preAnswerDiv = document.getElementById('pre-answer');
-			var tracks = await
-				$.ajax({
-					url: '{{ path('app_home_get_songs') }}',
-					type: 'POST',
-					success: function(data, status) {
-						return data;
-					},
-					error : function(error) {
-						console.log('Ajax request failed: ' + error);
-						return false;
-					}
-				});
-			var tracksCopy = tracks;
-
-			if (!tracks || tracks.length == 0) {
-				return console.log('failed to get songs');
-			}
-
-			console.log(tracks);
-
-			playBtn.addEventListener('click', startGame);
-
-			function startGame() {
-				let firstSongIndex = Math.floor(Math.random() * tracks.length);
-				playSong(firstSongIndex);
-				playBtn.style.display = 'none';
-			}
-
-			function playSong(index) {
-				var audio = new Audio(tracks[index].url);
-				audio.play();
-
-				audio.addEventListener('ended', function() {
-					displayAnswer(index);
-				})
-			}
-
-			function playNextSong(index) {
-				tracks.splice(index, 1);
-
-				if (tracks.length == 0) {
-					console.log('no more tracks');
-					return endGame();
-				}
-
-				return playSong(Math.floor(Math.random() * tracks.length));
-			}
-
-			function endGame() {
-				return console.log('Game has ended');
-			}
-
-			function displayAnswer(index) {
-				preAnswerDiv.style.display = 'block';
-				answer.innerText = tracks[index].artist.concat(' - ', tracks[index].title);
-
-				return setTimeout(() => {
-					preAnswerDiv.style.display = 'none';
-					answer.innerText = '';
-					playNextSong(index);
-				}, 5000);
-			}
-		});
-	</script>
+  <img id="track-image" src="https://picsum.photos/500" width="500" height="500">
 {% endblock %}
