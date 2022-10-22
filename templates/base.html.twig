@@ -21,7 +21,8 @@
 			<div class="container">
 				{% for label, messages in app.flashes %}
 					{% for message in messages %}
-						<div class="flash-{{ label }}">
+						<div class="notification is-{{ label }}">
+                            <button class="delete"></button>
 							{{ message }}
 						</div>
 					{% endfor %}
