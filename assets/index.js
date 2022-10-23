@@ -24,10 +24,7 @@ $(async function () {
         return false;
       }
     });
-  let tracksCopy = tracks;
   let username = 'You';
-
-  console.log(tracks);
 
   playBtn.addEventListener('click', startGame);
 
