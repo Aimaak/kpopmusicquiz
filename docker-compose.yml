@@ -16,9 +16,9 @@ services:
       timeout: 3s
       retries: 3
       start_period: 30s
-      # environment:
-      #   # Run "composer require symfony/orm-pack" to install and configure Doctrine ORM
-      #   DATABASE_URL: mysql://${DB_USER:-app}:${DB_PASSWORD:-ejvet}@database/${DB_DATABASE:-app}?serverVersion=${DB_VERSION:-8.0}&charset=utf8mb4
+    # environment:
+    #   # Run "composer require symfony/orm-pack" to install and configure Doctrine ORM
+    #   DATABASE_URL: mysql://${DB_USER:-app}:${DB_PASSWORD:-ejvet}@database/${DB_DATABASE:-app}?serverVersion=${DB_VERSION:-8.0}&charset=utf8mb4
 
   caddy:
     build:
@@ -46,7 +46,6 @@ services:
       - target: 443
         published: ${HTTP3_PORT:-443}
         protocol: udp
-
   # database:
   #   image: mysql:${DB_VERSION:-8.0}
   #   command: mysqld --default-authentication-plugin=mysql_native_password
@@ -72,5 +71,4 @@ services:
 volumes:
   php_socket:
   caddy_data:
-  caddy_config:
-  # db-data:
+  caddy_config: # db-data:
