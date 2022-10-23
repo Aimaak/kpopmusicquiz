@@ -11,5 +11,6 @@
 - [x] Display scores
 - [x] Implement play again
 - [x] Add image when showing answer
+- [ ] Randomize playlist before retrieving tracks
 - [ ] Add multiplayer
 - [ ] Save games data ?
