@@ -12,8 +12,6 @@ const displayScores = (scores) => {
 }
 
 const createTable = (scores) => {
-  console.log('Scores');
-  console.log(scores);
   let table = document.createElement('table');
   table.className = 'table is-fullwidth is-size-5 mx-auto mb-5';
 
