@@ -41,6 +41,7 @@ $(async function () {
     let audio = new Audio(tracks[index].url);
     canAnswerArtist = true;
     canAnswerTitle = true;
+    audio.volume = 0.2;
     audio.play();
 
     audio.addEventListener('ended', function () {
