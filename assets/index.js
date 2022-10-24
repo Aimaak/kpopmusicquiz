@@ -1,6 +1,7 @@
 import $ from 'jquery';
 import { checkArtistName, checkTrackName } from './check';
 import { displayScores } from './scores';
+import { Buffer } from 'buffer';
 
 $(async function () {
   let answerDiv = document.getElementById('answer');
@@ -25,6 +26,8 @@ $(async function () {
       }
     });
   let username = 'You';
+  let buf = new Buffer.from(tracks, 'base64');
+  tracks = JSON.parse(buf.toString('utf-8'));
 
   playBtn.addEventListener('click', startGame);
 
@@ -41,7 +44,7 @@ $(async function () {
     let audio = new Audio(tracks[index].url);
     canAnswerArtist = true;
     canAnswerTitle = true;
-    audio.volume = 0.2;
+    audio.volume = 0.3;
     audio.play();
 
     audio.addEventListener('ended', function () {

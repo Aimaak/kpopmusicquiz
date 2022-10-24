@@ -13,4 +13,5 @@
 - [x] Add image when showing answer
 - [ ] Randomize playlist before retrieving tracks
 - [ ] Add multiplayer
+- [ ] Add counter to keep track of the game (1/20 => 2/20, etc...)
 - [ ] Save games data ?
