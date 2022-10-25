@@ -68,6 +68,8 @@ class HomeController extends AbstractController
             }))
         );
 
+        shuffle($tracks);
+
         return new JsonResponse((base64_encode(json_encode($tracks))));
     }
 
