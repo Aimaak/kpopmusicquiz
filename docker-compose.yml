@@ -11,6 +11,7 @@ services:
     restart: unless-stopped
     volumes:
       - php_socket:/var/run/php
+      - ./var/data.db:/srv/app/var/data.db
     healthcheck:
       interval: 10s
       timeout: 3s
