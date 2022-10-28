@@ -22,7 +22,3 @@ services:
     volumes:
       - ./public:/srv/app/public:ro
       - ./docker/caddy/Caddyfile:/etc/caddy/Caddyfile:ro
-
-  # database:
-  #   ports:
-  #     - "3306:3306"
