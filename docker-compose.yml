@@ -11,7 +11,7 @@ services:
     restart: unless-stopped
     volumes:
       - php_socket:/var/run/php
-      - ./var/app.db:/srv/app/var/app.db
+      - ./docker/db/data:/srv/app/var/data.db
     healthcheck:
       interval: 10s
       timeout: 3s
@@ -19,7 +19,7 @@ services:
       start_period: 30s
     environment:
       # Run "composer require symfony/orm-pack" to install and configure Doctrine ORM
-      DATABASE_URL: sqlite:///%kernel.project_dir%/var/app.db
+      DATABASE_URL: sqlite:///%kernel.project_dir%/var/data.db
 
   caddy:
     build:
@@ -48,7 +48,25 @@ services:
         published: ${HTTP3_PORT:-443}
         protocol: udp
 
-volumes:
-  php_socket:
-  caddy_data:
-  caddy_config:
+# ###> doctrine/doctrine-bundle ###
+#   database:
+#     image: postgres:${POSTGRES_VERSION:-14}-alpine
+#     environment:
+#       POSTGRES_DB: ${POSTGRES_DB:-app}
+#       # You should definitely change the password in production
+#       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-!ChangeMe!}
+#       POSTGRES_USER: ${POSTGRES_USER:-app}
+#     volumes:
+#       - db-data:/var/lib/postgresql/data:rw
+#       # You may use a bind-mounted host directory instead, so that it is harder to accidentally remove the volume and lose all your data!
+#       # - ./docker/db/data:/var/lib/postgresql/data:rw
+# ###< doctrine/doctrine-bundle ###
+
+# volumes:
+#   php_socket:
+#   caddy_data:
+#   caddy_config:
+
+# ###> doctrine/doctrine-bundle ###
+#   db-data:
+# ###< doctrine/doctrine-bundle ###
