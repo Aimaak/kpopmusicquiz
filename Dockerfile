@@ -29,12 +29,17 @@ RUN chmod +x /usr/local/bin/install-php-extensions
 # persistent / runtime deps
 RUN apk add --no-cache \
 	acl \
+	bash \
 	fcgi \
 	file \
 	gettext \
 	git \
 	make \
 	npm \
+	; \
+	curl -1sLf 'https://dl.cloudsmith.io/public/symfony/stable/setup.alpine.sh' | bash \
+	; \
+	apk add symfony-cli \
 	;
 
 RUN set -eux; \
