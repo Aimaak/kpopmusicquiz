@@ -49,7 +49,7 @@ $(async function () {
 
     audio.addEventListener('ended', function () {
       displayAnswer(index);
-    })
+    });
   }
 
   function playNextSong(index) {
@@ -68,7 +68,7 @@ $(async function () {
   }
 
   function displayAnswer(index) {
-    answerDiv.innerText = 'The answer was: ' + tracks[index].artist.concat(' - ', tracks[index].title);
+    answerDiv.innerText = 'The answer was: ' + tracks[index].originalArtist.concat(' - ', tracks[index].originalTitle);
     guessInput.disabled = true;
     guessInput.classList = '';
     guessInput.classList.add('input', 'is-large');
