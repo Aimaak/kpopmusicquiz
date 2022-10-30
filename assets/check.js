@@ -36,7 +36,7 @@ const checkTrackName = ({ trackName, msg }) => {
 const cleanInput = (str) => {
   str = str.toLowerCase().trim();
   str = str.replace(/\s{2,}/g, " ");
-  str = str.replace(/(\'|\.)/g, " ");
+  str = str.replace(/(\'|\.|\*|\(|\))/g, " ");
   str = remove(str);
   str = str.trim();
 
