@@ -17,7 +17,7 @@ class Track
     private ?string $artist = null;
 
     #[ORM\Column(length: 255)]
-    private ?string $image_url = null;
+    private ?string $originalArtist = null;
 
     #[ORM\Column(length: 255)]
     private ?string $title = null;
@@ -27,6 +27,9 @@ class Track
 
     #[ORM\Column(length: 255)]
     private ?string $url = null;
+
+    #[ORM\Column(length: 255)]
+    private ?string $image_url = null;
 
     public function getId(): ?int
     {
@@ -45,14 +48,14 @@ class Track
         return $this;
     }
 
-    public function getImageUrl(): ?string
+    public function getOriginalArtist(): ?string
     {
-        return $this->image_url;
+        return $this->originalArtist;
     }
 
-    public function setImageUrl(string $image_url): self
+    public function setOriginalArtist(string $originalArtist): self
     {
-        $this->image_url = $image_url;
+        $this->originalArtist = $originalArtist;
 
         return $this;
     }
@@ -89,6 +92,18 @@ class Track
     public function setUrl(string $url): self
     {
         $this->url = $url;
+
+        return $this;
+    }
+
+    public function getImageUrl(): ?string
+    {
+        return $this->image_url;
+    }
+
+    public function setImageUrl(string $image_url): self
+    {
+        $this->image_url = $image_url;
 
         return $this;
     }
