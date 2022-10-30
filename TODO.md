@@ -11,10 +11,10 @@
 - [x] Display scores
 - [x] Implement play again
 - [x] Add image when showing answer
-- [ ] Handle all cases of groups / titles
-- [ ] Randomize playlist before retrieving tracks
+- [x] Handle all cases of groups / titles
+- [x] Randomize playlist before retrieving tracks
 - [ ] Add multiplayer
 - [ ] Add counter to keep track of the game (1/20 => 2/20, etc...)
-- [ ] SQLite DB
-- [ ] Store playlist data
-- [ ] Save games data
+- [x] SQLite DB
+- [x] Store playlist data
+- [ ] Save games data (scores, players ...)
