@@ -15,14 +15,14 @@
 	</head>
 	<body class="has-background-dark has-text-centered has-text-light">
 		<div class="content pt-3">
-			<h1 class="has-text-light">K-Pop Music Quiz</h1>
+			<h1 class="title is-1 has-text-light">K-Pop Music Quiz</h1>
 		</div>
 		<section class="section">
 			<div class="container">
 				{% for label, messages in app.flashes %}
 					{% for message in messages %}
 						<div class="notification is-{{ label }}">
-                            <button class="delete"></button>
+              <button class="delete"></button>
 							{{ message }}
 						</div>
 					{% endfor %}

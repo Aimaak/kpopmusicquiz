@@ -7,6 +7,11 @@ const displayScores = (scores) => {
     points: u[1],
   }));
 
+  let h2 = document.createElement('h2');
+  h2.className = 'subtitle is-2 has-text-light';
+  h2.innerHTML = 'Thanks for playing!';
+  container.appendChild(h2);
+
   createTable(scores);
   addPlayAgainButton();
 }

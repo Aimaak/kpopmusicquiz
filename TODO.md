@@ -13,8 +13,9 @@
 - [x] Add image when showing answer
 - [x] Handle all cases of groups / titles
 - [x] Randomize playlist before retrieving tracks
-- [ ] Add multiplayer
-- [ ] Add counter to keep track of the game (1/20 => 2/20, etc...)
+- [ ] Add multiplayer (ReactPHP ?)
+- [x] Add counter to keep track of the game (1/20 => 2/20, etc...)
+- [x] Add "Thanks for playing!" at end of game
 - [x] SQLite DB
 - [x] Store playlist data
-- [ ] Save games data (scores, players ...)
+- [ ] Save games data (scores, players ...) to make a scoreboard
