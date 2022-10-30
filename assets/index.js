@@ -13,6 +13,9 @@ $(async function () {
   let image = document.getElementById('track-image');
   let playBtn = document.getElementById('play-btn');
   let scores = [];
+  let trackCounter = 1;
+  let trackCounterSpan = document.getElementById('track-counter');
+  let tracksLengthSpan = document.getElementById('tracks-length');
   let tracks = await
     $.ajax({
       url: '/songs/get',
@@ -28,6 +31,7 @@ $(async function () {
   let username = 'You';
   let buf = new Buffer.from(tracks, 'base64');
   tracks = JSON.parse(buf.toString('utf-8'));
+  const tracksLength = tracks.length;
 
   playBtn.addEventListener('click', startGame);
 
@@ -50,6 +54,8 @@ $(async function () {
     audio.addEventListener('ended', function () {
       displayAnswer(index);
     });
+
+    updateTrackCounter();
   }
 
   function playNextSong(index) {
@@ -130,6 +136,12 @@ $(async function () {
     guessInput.classList = '';
     guessInput.classList.add('input', 'is-large');
     guessInput.classList.add(isRight ? 'is-success' : 'is-danger');
+  }
+
+  function updateTrackCounter() {
+    trackCounterSpan.innerText = trackCounter;
+    tracksLengthSpan.innerText = '/' + tracksLength;
+    trackCounter++;
   }
 });
 

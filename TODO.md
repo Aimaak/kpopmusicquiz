@@ -14,7 +14,7 @@
 - [x] Handle all cases of groups / titles
 - [x] Randomize playlist before retrieving tracks
 - [ ] Add multiplayer (ReactPHP ?)
-- [ ] Add counter to keep track of the game (1/20 => 2/20, etc...)
+- [x] Add counter to keep track of the game (1/20 => 2/20, etc...)
 - [x] Add "Thanks for playing!" at end of game
 - [x] SQLite DB
 - [x] Store playlist data
