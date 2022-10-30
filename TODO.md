@@ -18,4 +18,4 @@
 - [x] Add "Thanks for playing!" at end of game
 - [x] SQLite DB
 - [x] Store playlist data
-- [ ] Save games data (scores, players ...)
+- [ ] Save games data (scores, players ...) to make a scoreboard
