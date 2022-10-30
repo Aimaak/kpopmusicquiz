@@ -16,12 +16,12 @@ body {
     border-width: thick;
 }
 
-#track-image {
+#track-image, #guess-form {
     display: none;
 }
 
 @media screen and (min-width: 1024px) {
-    input#guess {
+    input.input {
         width: 50%;
     }
 }

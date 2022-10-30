@@ -1,6 +1,6 @@
 import $ from 'jquery';
 import { checkArtistName, checkTrackName } from './check';
-import { displayScores } from './scores';
+import { displayScores, saveScores } from './scores';
 import { Buffer } from 'buffer';
 
 $(async function () {
@@ -28,12 +28,12 @@ $(async function () {
         return false;
       }
     });
-  let username = 'You';
+  let username;
+  let usernameInput = document.getElementById('username');
+  usernameInput.onkeypress = clsAlphaNoOnly;
   let buf = new Buffer.from(tracks, 'base64');
   tracks = JSON.parse(buf.toString('utf-8'));
   const tracksLength = tracks.length;
-
-  playBtn.addEventListener('click', startGame);
 
   function startGame() {
     if (!tracks || tracks.length == 0) {
@@ -70,6 +70,7 @@ $(async function () {
   }
 
   function endGame() {
+    saveScores(scores);
     return displayScores(scores);
   }
 
@@ -88,10 +89,23 @@ $(async function () {
       answerDiv.innerText = '';
       guessInput.disabled = false;
       guessInput.placeholder = 'Guess the title and/or the artist';
+      guessInput.focus();
       image.style.display = 'none';
       playNextSong(index);
     }, 10000);
   }
+
+  $('#username-form').on('submit', function (event) {
+    event.preventDefault();
+    if (usernameInput.value == '') {
+      usernameInput.classList.add('is-danger');
+      return false;
+    }
+    username = usernameInput.value;
+    document.getElementById('username-form').style.display = 'none';
+    document.getElementById('guess-form').style.display = 'block';
+    startGame();
+  });
 
   $('#guess-form').on('submit', function (event) {
     event.preventDefault();
@@ -142,6 +156,17 @@ $(async function () {
     trackCounterSpan.innerText = trackCounter;
     tracksLengthSpan.innerText = '/' + tracksLength;
     trackCounter++;
+  }
+
+  function clsAlphaNoOnly(e) {  // Accept only alpha numerics, no special characters
+    var regex = new RegExp("^[a-zA-Z0-9 ]+$");
+    var str = String.fromCharCode(!e.charCode ? e.which : e.charCode);
+    if (regex.test(str)) {
+      return true;
+    }
+
+    e.preventDefault();
+    return false;
   }
 });
 
