@@ -13,10 +13,11 @@
 - ✅ Add image when showing answer
 - ✅ Handle all cases of groups / titles
 - ✅ Randomize playlist before retrieving tracks
-- ❌ Add multiplayer (ReactPHP ?)
+- ❌ Add multiplayer (ReactPHP ? / unique session id created by a player, input to join with session id)
 - ✅ Add counter to keep track of the game (1/20 => 2/20, etc...)
 - ✅ Add "Thanks for playing!" at end of game
 - ✅ SQLite DB
 - ✅ Store playlist data
 - ❌ Add volume control
+- ❌ Add number of tracks select
 - ❌ Save games data (scores, players ...) to make a scoreboard
