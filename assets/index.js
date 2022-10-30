@@ -75,7 +75,7 @@ $(async function () {
     guessInput.placeholder = 'Wait for next song';
     guessInput.value = '';
     guessResult.innerText = '';
-    image.src = tracks[index].image.url;
+    image.src = tracks[index].imageUrl;
     image.style.display = 'initial';
 
     return setTimeout(() => {
