@@ -19,7 +19,7 @@ $(async function () {
   let tracks = await
     $.ajax({
       url: '/songs/get',
-      type: 'POST',
+      type: 'GET',
       success: function (data) {
         return data;
       },
