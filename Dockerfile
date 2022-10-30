@@ -29,12 +29,17 @@ RUN chmod +x /usr/local/bin/install-php-extensions
 # persistent / runtime deps
 RUN apk add --no-cache \
 	acl \
+	bash \
 	fcgi \
 	file \
 	gettext \
 	git \
 	make \
 	npm \
+	; \
+	curl -1sLf 'https://dl.cloudsmith.io/public/symfony/stable/setup.alpine.sh' | bash \
+	; \
+	apk add symfony-cli \
 	;
 
 RUN set -eux; \
@@ -46,6 +51,12 @@ RUN set -eux; \
 	;
 
 ###> recipes ###
+###> doctrine/doctrine-bundle ###
+# RUN apk add --no-cache --virtual .pgsql-deps postgresql-dev; \
+# 	docker-php-ext-install -j$(nproc) pdo_pgsql; \
+# 	apk add --no-cache --virtual .pgsql-rundeps so:libpq.so.5; \
+# 	apk del .pgsql-deps
+###< doctrine/doctrine-bundle ###
 ###< recipes ###
 
 RUN mv "$PHP_INI_DIR/php.ini-production" "$PHP_INI_DIR/php.ini"
