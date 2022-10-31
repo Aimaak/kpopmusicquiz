@@ -56,6 +56,18 @@ class ScoreRepository extends ServiceEntityRepository
             ->getOneOrNullResult();
     }
 
+    /**
+     * @return Score[] Returns an array of Score objects
+     */
+    public function findByPointsWithLimit(int $limit = 10): array
+    {
+        return $this->createQueryBuilder('s')
+            ->orderBy('s.points', 'DESC')
+            ->setMaxResults($limit)
+            ->getQuery()
+            ->getResult();
+    }
+
     //    /**
     //     * @return Score[] Returns an array of Score objects
     //     */
