@@ -62,19 +62,6 @@ services:
   #       # - ./docker/db/data:/var/lib/postgresql/data:rw
   # ###< doctrine/doctrine-bundle ###
 
-  phpliteadmin:
-    hostname: phpliteadmin
-    image: vtacquet/phpliteadmin
-    restart: unless-stopped
-    volumes:
-      - /etc/localtime:/etc/localtime:ro
-      - ./var/data.db:/db/data.db
-    ports:
-      - "8741:80"
-    environment:
-      - TZ=Europe/Paris
-      - LOCATION=/db
-
 volumes:
   php_socket:
   caddy_data:
