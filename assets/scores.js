@@ -22,8 +22,8 @@ const createTable = (scores) => {
   let table = document.createElement('table');
   table.className = 'table is-fullwidth is-size-5 mx-auto mb-5';
 
-  let thead = table.createTHead();
-  let rowHeader = thead.insertRow();
+  let tbody = table.createTBody();
+  let rowHeader = tbody.insertRow();
   let playerHeader = rowHeader.insertCell();
   let scoreHeader = rowHeader.insertCell();
   let strongPlayerHeader = document.createElement("strong");
