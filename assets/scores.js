@@ -1,3 +1,5 @@
+import $ from 'jquery';
+
 let container = document.querySelector('div.container');
 
 const displayScores = (scores) => {
@@ -20,8 +22,8 @@ const createTable = (scores) => {
   let table = document.createElement('table');
   table.className = 'table is-fullwidth is-size-5 mx-auto mb-5';
 
-  let thead = table.createTHead();
-  let rowHeader = thead.insertRow();
+  let tbody = table.createTBody();
+  let rowHeader = tbody.insertRow();
   let playerHeader = rowHeader.insertCell();
   let scoreHeader = rowHeader.insertCell();
   let strongPlayerHeader = document.createElement("strong");
@@ -57,4 +59,24 @@ const addPlayAgainButton = () => {
   container.appendChild(btn);
 }
 
-export { displayScores };
+const saveScores = (scores, numberOfTracks) => {
+  $.ajax({
+    data: { scores: scores },
+    dataType: 'json',
+    type: 'POST',
+    url: '/score/add?nb=' + numberOfTracks,
+    success: function (data) {
+      if (!data.success) {
+        console.log('Failed add score');
+        return false;
+      }
+      return true;
+    },
+    error: function (error) {
+      console.log('Ajax request failed: ' + error);
+      return false;
+    }
+  });
+}
+
+export { displayScores, saveScores };

@@ -1,21 +1,23 @@
 # TODO
 
-- [x] Add database connection
-- [x] Retrieve playlist info
-- [x] Retrieve a limited number of tracks
-- [x] Play a song on front view
-- [x] Retrieve user input to check the guess
-- [x] Keep track of the scores throughout the game
-- [x] Notify if user's wrong or right
-- [x] Fix Dockerfile (put it at root folder)
-- [x] Display scores
-- [x] Implement play again
-- [x] Add image when showing answer
-- [x] Handle all cases of groups / titles
-- [x] Randomize playlist before retrieving tracks
-- [ ] Add multiplayer (ReactPHP ?)
-- [x] Add counter to keep track of the game (1/20 => 2/20, etc...)
-- [x] Add "Thanks for playing!" at end of game
-- [x] SQLite DB
-- [x] Store playlist data
-- [ ] Save games data (scores, players ...) to make a scoreboard
+- ✅ Add database connection
+- ✅ Retrieve playlist info
+- ✅ Retrieve a limited number of tracks
+- ✅ Play a song on front view
+- ✅ Retrieve user input to check the guess
+- ✅ Keep track of the scores throughout the game
+- ✅ Notify if user's wrong or right
+- ✅ Fix Dockerfile (put it at root folder)
+- ✅ Display scores
+- ✅ Implement play again
+- ✅ Add image when showing answer
+- ✅ Handle all cases of groups / titles
+- ✅ Randomize playlist before retrieving tracks
+- ❌ Add multiplayer (ReactPHP ? / unique session id created by a player, input to join with session id)
+- ✅ Add counter to keep track of the game (1/20 => 2/20, etc...)
+- ✅ Add "Thanks for playing!" at end of game
+- ✅ SQLite DB
+- ✅ Store playlist data
+- ❌ Add volume control
+- ❌ Add number of tracks select
+- ✅ Save games data (scores, players ...) to make a scoreboard

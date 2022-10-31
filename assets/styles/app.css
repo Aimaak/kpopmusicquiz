@@ -8,6 +8,28 @@ body {
     overflow: hidden;
 }
 
+nav {
+    display: flex;
+    width: 100%;
+}
+
+nav>nav.section {
+    padding: 3rem 2rem;
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    justify-content: center;
+}
+
+#nav-logo-section,
+#nav-title-section {
+    flex-basis: calc(100%/3);
+}
+
+#nav-link-section {
+    flex-grow: 1;
+}
+
 .section {
     height: 80vh;
 }
@@ -16,12 +38,13 @@ body {
     border-width: thick;
 }
 
-#track-image {
+#track-image,
+#guess-form {
     display: none;
 }
 
 @media screen and (min-width: 1024px) {
-    input#guess {
+    input.input {
         width: 50%;
     }
 }

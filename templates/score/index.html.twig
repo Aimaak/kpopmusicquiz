@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% set i = 1 %}
+
+{% block title %}KMQ - Scoreboard{% endblock %}
+
+{% block body %}
+  <h3 class="subtitle is-2 has-text-light">Top 10 Players</h3>
+  <table class="table is-fullwidth is-size-5 mx-auto mb-5">
+    <thead>
+      <tr>
+        <th align="center"><strong>#</strong></th>
+        <th align="center"><strong>Username</strong></th>
+        <th align="center"><strong>Points</strong></th>
+        <th align="center"><strong>Number of tracks</strong></th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for score in topScores %}
+        <tr>
+          <td>{{ i }}</td>
+          <td>{{ score.player }}</td>
+          <td>{{ score.points }}</td>
+          <td>{{ score.numberOfTracks }}</td>
+        </tr>
+        {% set i = i + 1 %}
+      {% endfor %}
+    </tbody>
+  </table>
+{% endblock %}
