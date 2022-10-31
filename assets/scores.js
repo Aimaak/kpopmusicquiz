@@ -1,3 +1,5 @@
+import $ from 'jquery';
+
 let container = document.querySelector('div.container');
 
 const displayScores = (scores) => {
@@ -57,4 +59,24 @@ const addPlayAgainButton = () => {
   container.appendChild(btn);
 }
 
-export { displayScores };
+const saveScores = (scores, numberOfTracks) => {
+  $.ajax({
+    data: { scores: scores },
+    dataType: 'json',
+    type: 'POST',
+    url: '/score/add?nb=' + numberOfTracks,
+    success: function (data) {
+      if (!data.success) {
+        console.log('Failed add score');
+        return false;
+      }
+      return true;
+    },
+    error: function (error) {
+      console.log('Ajax request failed: ' + error);
+      return false;
+    }
+  });
+}
+
+export { displayScores, saveScores };

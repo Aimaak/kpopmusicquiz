@@ -12,7 +12,7 @@ $(async function () {
   let guessResult = document.getElementById('guess-result');
   let image = document.getElementById('track-image');
   let playBtn = document.getElementById('play-btn');
-  let scores = [];
+  let scores = {};
   let trackCounter = 1;
   let trackCounterSpan = document.getElementById('track-counter');
   let tracksLengthSpan = document.getElementById('tracks-length');
@@ -70,7 +70,7 @@ $(async function () {
   }
 
   function endGame() {
-    saveScores(scores);
+    saveScores(scores, tracksLength);
     return displayScores(scores);
   }
 
