@@ -20,4 +20,4 @@
 - ✅ Store playlist data
 - ❌ Add volume control
 - ❌ Add number of tracks select
-- ❌ Save games data (scores, players ...) to make a scoreboard
+- ✅ Save games data (scores, players ...) to make a scoreboard
