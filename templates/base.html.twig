@@ -14,9 +14,17 @@
 		{% endblock %}
 	</head>
 	<body class="has-background-dark has-text-centered has-text-light">
-		<div class="content pt-3">
-			<h1 class="title is-1 has-text-light">K-Pop Music Quiz</h1>
-		</div>
+		<nav class="pt-3">
+      <div id="nav-logo-section" class="nav-section">
+
+      </div>
+      <div id="nav-title-section" class="nav-section">
+        <h1 class="title is-2 has-text-light">K-Pop Music Quiz</h1>
+      </div>
+      <div id="nav-link-section" class="nav-section">
+        <a class="button is-primary is-justify-content-end" href="{{ path('app_score') }}">Scoreboard</a>
+      </div>
+		</nav>
 		<section class="section">
 			<div class="container">
 				{% for label, messages in app.flashes %}
