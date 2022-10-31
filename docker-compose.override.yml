@@ -23,8 +23,21 @@ services:
       - ./public:/srv/app/public:ro
       - ./docker/caddy/Caddyfile:/etc/caddy/Caddyfile:ro
 
-###> doctrine/doctrine-bundle ###
+  ###> doctrine/doctrine-bundle ###
   # database:
   #   ports:
   #     - "5432"
-###< doctrine/doctrine-bundle ###
+  ###< doctrine/doctrine-bundle ###
+
+  phpliteadmin:
+    hostname: phpliteadmin
+    image: vtacquet/phpliteadmin
+    restart: unless-stopped
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - ./var/data.db:/db/data.db
+    ports:
+      - "8741:80"
+    environment:
+      - TZ=Europe/Paris
+      - LOCATION=/db
