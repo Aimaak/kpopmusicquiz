@@ -10,6 +10,10 @@ section {
     flex-grow: 1;
 }
 
+.table {
+    border-radius: 4px;
+}
+
 .input.is-large.is-danger,
 .input.is-large.is-success {
     border-width: thick;
