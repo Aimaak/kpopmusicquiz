@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html>
+<html class="has-navbar-fixed-top">
+
 	<head>
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -13,20 +14,33 @@
 			{{ encore_entry_script_tags('app') }}
 		{% endblock %}
 	</head>
-	<body class="has-background-dark has-text-centered has-text-light">
-		<nav class="pt-3">
-      <div id="nav-logo-section" class="nav-section">
 
+	<body class="has-background-dark has-text-centered has-text-light">
+
+    <nav class="navbar is-fixed-top is-dark" role="navigation" aria-label="main navigation">
+
+      <div class="navbar-brand">
+        <a class="navbar-item" href="#">
+          <img src="{{ asset('build/images/logo.png') }}">
+        </a>
       </div>
-      <div id="nav-title-section" class="nav-section">
-        <h1 class="title is-2 has-text-light">K-Pop Music Quiz</h1>
+
+      <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+      </a>
+
+      <div class="navbar-menu">
+        <div class="navbar-start">
+          <a class="navbar-item" href="{{ path('app_home') }}">Play</a>
+          <a class="navbar-item" href="{{ path('app_score') }}">Scoreboard</a>
+        </div>
       </div>
-      <div id="nav-link-section" class="nav-section">
-        <a class="button is-primary is-justify-content-end" href="{{ path('app_home') }}">Play</a>
-        <a class="button is-primary is-justify-content-end" href="{{ path('app_score') }}">Scoreboard</a>
-      </div>
-		</nav>
+    </nav>
+
 		<section class="section">
+
 			<div class="container">
 				{% for label, messages in app.flashes %}
 					{% for message in messages %}
@@ -36,15 +50,18 @@
 						</div>
 					{% endfor %}
 				{% endfor %}
+
 				{% block body %}{% endblock %}
+
 			</div>
+
 		</section>
-		<footer class="footer has-background-dark is-fixed-bottom">
-			<div class="content has-text-centered">
-				<p>
-					Made with &hearts; by <a href="https://twitter.com/Aimaak_">Aimak</a>
-				</p>
-			</div>
+
+		<footer class="footer has-background-dark">
+      <p>
+        Made with &hearts; by <a href="https://twitter.com/Aimaak_">Aimak</a>
+      </p>
 		</footer>
+
 	</body>
 </html>
