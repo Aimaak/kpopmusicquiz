@@ -18,7 +18,7 @@
 - ✅ SQLite DB
 - ✅ Store playlist data
 - ✅ Save games data (scores, players ...) to make a scoreboard
-- ❌ Keep 10 backups of database max
+- ✅ Keep 14 days of database backups
 - ❌ Add volume control
 - ❌ Add number of tracks select
 - ❌ Add skip button when artist and title are found
